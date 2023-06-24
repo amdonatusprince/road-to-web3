@@ -19,4 +19,3 @@
   <p>
     The getAllPayments function retrieves all the payments made by students. It returns arrays containing the addresses of the students, their full names, registration numbers, courses of study, and the amounts they have paid.
   </p>
-</body>
