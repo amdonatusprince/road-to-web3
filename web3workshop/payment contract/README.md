@@ -1,18 +1,6 @@
 
 <h1>Smart Contract for School Fees Payment</h1>
 
-<h2>Contract Code</h2>
-
-<pre>
-    <code>
-      pragma solidity ^0.8.0;
-
-      contract SchoolFees {
-          // ... (insert the smart contract code here)
-      }
-    </code>
-</pre>
-
 <h2>Contract Description</h2>
 
 <h3>
