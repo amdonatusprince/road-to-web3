@@ -1,5 +1,6 @@
 import React from 'react';
 import './form.css';
+import { Button } from '../connectButton/button';
 
 
 export default function Form() {
@@ -8,6 +9,7 @@ export default function Form() {
       <div className="left-part">
         <i className="fas fa-graduation-cap"></i>
         <h1>Pay Your School Fees</h1>
+        <Button />
       </div>
       <form action="/">
         <div className="title">

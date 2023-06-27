@@ -1,13 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import Form from './components/form/form'
+import React, { useState } from 'react'
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { mainnet, polygon, optimism, arbitrum, goerli, bscTestnet, bsc, sepolia } from 'wagmi/chains';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+import { useAccount } from 'wagmi'
+
+
+
+const { chains, publicClient } = configureChains(
+  [mainnet, polygon, optimism, arbitrum, goerli, bscTestnet, bsc, sepolia],
+  [
+    alchemyProvider({ apiKey: import.meta.env.VITE_REACT_APP_ALCHEMY_ID}),
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'Hyve Finance',
+  projectId: '274de4271228fdd69013c56274f0e688',
+  chains
+});
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient
+})
 
 function App() {
 
   return (
-    < Form />
+
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains}>
+      < Form />
+      </RainbowKitProvider>
+    </WagmiConfig>
+
   )
 }
 
