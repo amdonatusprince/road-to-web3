@@ -9,7 +9,6 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli, bscTestnet, bsc, sepolia } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { useAccount } from 'wagmi'
 
 
 
@@ -22,7 +21,7 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'Hyve Finance',
+  appName: 'UNN School Fees Payment',
   projectId: '274de4271228fdd69013c56274f0e688',
   chains
 });
