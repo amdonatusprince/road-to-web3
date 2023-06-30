@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './form.css';
 import { Button } from '../connectButton/button';
-import { useAccount } from 'wagmi'
 import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction
 } from 'wagmi';
-import {paySchoolFeesABI} from '../../utils/paySchoolFees'
+import {paySchoolFeesABI} from '../../utils/SchoolFees'
+import Approve from '../connectButton/approveButton';
 
 
 export default function Form() {
@@ -21,24 +21,21 @@ export default function Form() {
 
   const { config, error } = usePrepareContractWrite({
     address: import.meta.env.VITE_REACT_APP_SCHOOL_PAYMENT_CONTRACT,
-    abi: paySchoolFeesABI.paySchoolFeesABI,
+    abi: paySchoolFeesABI,
     functionName: 'paySchoolFees',
     args: [
       fullName,
       regNo,
       courseOfStudy,
-      amount * 10**18
+      amount 
     ]
   })
 
-  const { write } = useContractWrite(config)
+  const { data, write } = useContractWrite(config);
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  });
 
-  console.log( [
-    fullName,
-    regNo,
-    courseOfStudy,
-    amount
-  ])
 
   return (
 
@@ -50,7 +47,7 @@ export default function Form() {
          <Button />
         </div>
       </div>
-      <form action="/">
+      <form>
         <div className="title">
           <i className="fas fa-pencil-alt"></i>
           <h2>Register here</h2>
@@ -64,6 +61,7 @@ export default function Form() {
           placeholder="Full name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
+          required
         />
 
         <input
@@ -72,6 +70,7 @@ export default function Form() {
           placeholder="Reg No"
           value={regNo}
           onChange={(e) => setRegNo(e.target.value)}
+          required
         />
 
         <input
@@ -80,28 +79,40 @@ export default function Form() {
           placeholder="Course of Study"
           value={courseOfStudy}
           onChange={(e) => setCourseOfStudy(e.target.value)}
+          required
         />
 
         <input
-          type="number"
+          type="text"
           name="name"
           placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          required
         />
         </div>
-            <button type="submit" disabled={!write} onClick={() => {
+            <Approve amount={amount} />
+            <button disabled={!write || !fullName || !regNo || !courseOfStudy || !amount} onClick={() => {
               setButtonClicked(true); 
               write?.();
             }}> 
-            Pay School Fees
+            {isLoading ? 'Paying School Fees...' : 'Pay School Fees'}
             </button>
-            {error && error.message && (
+            {/* {error && error.message && (
         <div style={{marginTop: '20px',  color: 'red' }}>
           An error occurred preparing the transaction: {error.message}</div>
-      )}
+      )} */}
       </form>
+      {isSuccess && (
+        <div>
+          You've Successfully Paid Your School Fees with UNN Native Currency!
+          <div>
+            <a href={`https://goerli.etherscan.io/tx/${data?.hash}`}>View on Goerli Etherscan</a>
+          </div>
+        </div>
+      )}
     </div>
+    
   );
 }
 

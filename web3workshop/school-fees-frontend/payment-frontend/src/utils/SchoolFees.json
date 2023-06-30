@@ -1,0 +1,164 @@
+{
+    "paySchoolFeesABI" : [
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "tokenAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "_schoolWallet",
+					"type": "address"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "studentAddress",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "fullName",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "regNo",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "courseOfStudy",
+					"type": "string"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amountPaid",
+					"type": "uint256"
+				}
+			],
+			"name": "PaymentReceived",
+			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "string",
+					"name": "_fullName",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_regNo",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_courseOfStudy",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_amount",
+					"type": "uint256"
+				}
+			],
+			"name": "paySchoolFees",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "allPayments",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "studentAddress",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "fullName",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "regNo",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "courseOfStudy",
+					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amountPaid",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getPayments",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "address",
+							"name": "studentAddress",
+							"type": "address"
+						},
+						{
+							"internalType": "string",
+							"name": "fullName",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "regNo",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "courseOfStudy",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "amountPaid",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct SchoolFeesPayment.PaymentRecord[]",
+					"name": "",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		}
+	]
+}
