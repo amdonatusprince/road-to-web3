@@ -27,7 +27,7 @@ export default function Form() {
       fullName,
       regNo,
       courseOfStudy,
-      amount 
+      BigInt(amount) * BigInt(10) ** BigInt(18)
     ]
   })
 

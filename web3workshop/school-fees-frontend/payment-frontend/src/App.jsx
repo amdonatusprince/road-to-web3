@@ -9,6 +9,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum, goerli, bscTestnet, bsc, sepolia } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import GetAllPayments  from './components/getPayment/getPayment';
 
 
 
@@ -39,6 +40,7 @@ function App() {
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
       < Form />
+      <GetAllPayments />
       </RainbowKitProvider>
     </WagmiConfig>
 
